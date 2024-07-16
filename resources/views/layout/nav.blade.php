@@ -19,8 +19,10 @@
         <div class="navbar-nav w-100">
             <a href="{{route('dashboard')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{route('client.index')}}" class="nav-item nav-link"><i class="bi bi-people"></i> CLIENTS</a>
-            <a href="{{route('article.index')}}" class="nav-item nav-link"><i class="bi bi-cart"></i> ARTICLES</a>
-           
+            <a href="{{route('article.index')}}" class="nav-item nav-link"><i class="bi bi-cart"></i> LINGES</a>
+            <a href="{{route('facture.index')}}" cl
+            *ss="nav-item nav-link"><i class="bi bi-receipt"></i> FACTURES</a>
+            <a href="{{route('gestionutilisateur.index')}}" class="nav-item nav-link"><i class="bi bi-person-circle"></i> UTILISATEURS</a>
         </div>
     </nav>
 </div>

@@ -1,4 +1,4 @@
-CREATE database ePressin;
+CREATE database ePressing;
 
 CREATE TABLE client(
     idclient INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

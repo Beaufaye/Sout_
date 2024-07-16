@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\client;
-class clientController extends Controller
+use App\Models\Client;
+
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $client = client::all();
-        return view('client.client', compact('client'));
+       
+        $clients = Client::orderBy('nom')->get();
+        return view('client.client', compact('clients'));
     }
 
     /**
@@ -28,7 +30,7 @@ class clientController extends Controller
      */
     public function store(Request $request)
     {
-        $client = new client();
+        $client = new Client();
         $client->nom = $request->nom;
         $client->prenom = $request->prenom;
         $client->sexe = $request->sexe;
@@ -51,7 +53,7 @@ class clientController extends Controller
      */
     public function edit(string $id)
     {
-        $client = client::find($id);
+        $client = Client::find($id);
         return view('client.modclient', compact('client'));
     }
 
@@ -60,7 +62,7 @@ class clientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $client = client::find($id);
+        $client = Client::find($id);
         
         $client->update([
             'nom' => $request->nom,
@@ -69,7 +71,6 @@ class clientController extends Controller
             'telephone' => $request->telephone,
         ]);
    
-     
         return redirect()->route('client.index')->with('status', 'Le client a été modifié avec succès.');
     }
 
@@ -78,8 +79,28 @@ class clientController extends Controller
      */
     public function destroy(string $id)
     {
-        $client = client::find($id);
+        $client = Client::find($id);
         $client->delete();
         return redirect()->route('client.index')->with('status', 'Le client a été supprimé avec succès.');
     }
+
+    /**
+     * Search clients based on query.
+     */
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Rechercher parmi les clients par nom, prénom, sexe, ou téléphone
+        $clients = Client::where('nom', 'LIKE', "%{$query}%")
+            ->orWhere('prenom', 'LIKE', "%{$query}%")
+            ->orWhere('sexe', 'LIKE', "%{$query}%")
+            ->orWhere('telephone', 'LIKE', "%{$query}%")
+            ->orderBy('nom')
+            ->get();
+
+        return view('client.client_liste', compact('clients'))->render();
+    }
+
 }
+

@@ -6,28 +6,25 @@
     
 <div class="container-fluid pt-4 px-4">
     <div class="bg-secondary text-center rounded p-4">
-       
+        <div class="pagetitle col-lg-8">
+            <a href="{{route('facture.create')}}"><button type="button" class="btn btn-danger text-center">FAIRE UNE FACTURE</button></a>
+          </div>
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <h6 class="mb-0">Linges déposés</h6>
+            <h6 class="mb-0">Liste des Factures</h6>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
                 <thead>
                     <tr class="text-white">
                         <th scope="col">ID</th>
-                        <th scope="col">Libellé</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Catégorie</th>
+                        <th scope="col">Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($article as $article)
+                    @foreach($facture as $facture)
                     <tr>
-                        <td>{{ $article->id}}</td>
-                        <td>{{ $article->nom}}</td>
-                        <td>{{ $article->nombre}}</td>
-                        <td>{{ $article->categorie}}</td>
-                        
+                        <td>{{ $facture->id}}</td>
+                        <td>{{ $facture->Date}}</td>
                     </tr>
                     @endforeach
                 </tbody>
